@@ -1,0 +1,46 @@
+class husband:
+    def __init__(self,name):
+        self.name = name
+        self.satiety = 30
+        self.money = 0
+        self.fridge = 50
+    def __str__(self):
+        return 'Я {}, у меня {} голода и у меня {} монет!'.format(self.name , self.satiety ,self.money)
+    def work(self):
+        print('Я {} иду работать'.format(self.name))
+        self.money += 150
+        self.satiety -= 10
+        print('Я {} заработал {} монет!'.format(self.name,self.money))
+    def eat(self):
+        if self.fridge >= 50:
+            self.satiety += 30
+            self.fridge -= 50
+            print('Я {} очень вкусно поел,у меня {} голода!'.format(self.name,self.satiety))
+    def shopping(self):
+        if self.money >= 50:
+            self.money -= 50
+            self.fridge += 50
+            print('Я {} сходил в магазин и потратил {} монет,зато поем!'.format(self.name,self.money))
+    def WOT(self):
+        self.satiety -= 10
+        print('я {} играю в WOT,у меня {} голода'.format(self.name,self.satiety))
+    def act(self):
+        dis = randint(1,6)
+        if self.fridge <= 50:
+            return self.shopping()
+        if dis == 1:
+            return self.work()
+        elif self.money <= 10:
+            return self.work()
+        elif self.satiety <= 30:
+            return self.eat()
+        elif self.satiety <= 0:
+            return('я умер...')
+        else:
+            return self.WOT()
+
+s=husband(name='Васек')
+for day in range(1, 366):
+    print(f'========= {day} ======')
+    s.act()
+    print(s)
